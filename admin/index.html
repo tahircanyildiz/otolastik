@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OtoLastik Pro - Admin Panel</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/quill@2.0.0/dist/quill.snow.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Loading Spinner -->
+    <div id="loadingSpinner" class="loading-spinner">
+        <div class="spinner"></div>
+        <p>Yükleniyor...</p>
+    </div>
+
+    <!-- Login Section -->
+    <div id="loginSection" class="login-container">
+        <div class="login-box">
+            <div class="login-header">
+                <i class="fas fa-shield-alt"></i>
+                <h2>Admin Giriş</h2>
+                <p>OtoLastik Pro Yönetim Paneli</p>
+            </div>
+            
+            <form id="loginForm" class="login-form">
+                <div class="form-group">
+                    <label for="email">
+                        <i class="fas fa-envelope"></i>
+                        Email
+                    </label>
+                    <input type="email" id="email" name="email" required placeholder="admin@otolastik.com">
+                </div>
+                
+                <div class="form-group">
+                    <label for="password">
+                        <i class="fas fa-lock"></i>
+                        Şifre
+                    </label>
+                    <input type="password" id="password" name="password" required placeholder="••••••••">
+                </div>
+                
+                <button type="submit" class="login-btn">
+                    <i class="fas fa-sign-in-alt"></i>
+                    Giriş Yap
+                </button>
+            </form>
+            
+            <div id="loginError" class="error-message" style="display: none;"></div>
+        </div>
+    </div>
+
+    <!-- Admin Dashboard -->
+    <div id="adminDashboard" class="admin-dashboard" style="display: none;">
+        <!-- Header -->
+        <header class="admin-header">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-cogs"></i>
+                    <h1>OtoLastik Pro Admin</h1>
+                </div>
+                <div class="header-actions">
+                    <button id="viewSite" class="btn btn-outline">
+                        <i class="fas fa-external-link-alt"></i>
+                        Siteyi Görüntüle
+                    </button>
+                    <button id="logoutBtn" class="btn btn-danger">
+                        <i class="fas fa-sign-out-alt"></i>
+                        Çıkış
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Navigation -->
+        <nav class="admin-nav">
+            <ul class="nav-tabs">
+                <li class="nav-item">
+                    <button class="nav-link active" data-tab="general">
+                        <i class="fas fa-home"></i>
+                        Genel Bilgiler
+                    </button>
+                </li>
+                <li class="nav-item">
+                    <button class="nav-link" data-tab="services">
+                        <i class="fas fa-tools"></i>
+                        Hizmetler
+                    </button>
+                </li>
+                <li class="nav-item">
+                    <button class="nav-link" data-tab="brands">
+                        <i class="fas fa-star"></i>
+                        Markalar
+                    </button>
+                </li>
+                <li class="nav-item">
+                    <button class="nav-link" data-tab="contact">
+                        <i class="fas fa-phone"></i>
+                        İletişim
+                    </button>
+                </li>
+                <li class="nav-item">
+                    <button class="nav-link" data-tab="about">
+                        <i class="fas fa-info-circle"></i>
+                        Hakkımızda
+                    </button>
+                </li>
+            </ul>
+        </nav>
+
+        <!-- Content Area -->
+        <main class="admin-content">
+            <div class="content-wrapper">
+                <!-- Success/Error Messages -->
+                <div id="messageContainer"></div>
+
+                <!-- General Tab -->
+                <div id="generalTab" class="tab-content active">
+                    <div class="section-header">
+                        <h2><i class="fas fa-home"></i> Genel Site Bilgileri</h2>
+                        <p>Site başlığı, ana sayfa içeriği ve hero bölümü ayarları</p>
+                    </div>
+
+                    <div class="form-grid">
+                        <div class="form-section">
+                            <h3>Site Başlığı</h3>
+                            <div class="form-group">
+                                <label for="siteTitle">Site Başlığı</label>
+                                <input type="text" id="siteTitle" placeholder="OtoLastik Pro - Lastik Uzmanı">
+                            </div>
+                        </div>
+
+                        <div class="form-section">
+                            <h3>Ana Sayfa Hero Bölümü</h3>
+                            <div class="form-group">
+                                <label for="heroTitle">Ana Başlık</label>
+                                <input type="text" id="heroTitle" placeholder="Kaliteli Lastik, Güvenli Yolculuk">
+                            </div>
+                            <div class="form-group">
+                                <label for="heroDescription">Açıklama</label>
+                                <textarea id="heroDescription" rows="3" placeholder="Ana sayfa açıklama metni..."></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="action-buttons">
+                        <button id="saveGeneral" class="btn btn-primary">
+                            <i class="fas fa-save"></i>
+                            Kaydet
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Services Tab -->
+                <div id="servicesTab" class="tab-content">
+                    <div class="section-header">
+                        <h2><i class="fas fa-tools"></i> Hizmetler Yönetimi</h2>
+                        <p>Sunulan hizmetleri ekle, düzenle veya sil</p>
+                    </div>
+
+                    <div class="services-manager">
+                        <div class="add-service-section">
+                            <h3>Yeni Hizmet Ekle</h3>
+                            <div class="service-form">
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="serviceTitle">Hizmet Adı</label>
+                                        <input type="text" id="serviceTitle" placeholder="Lastik Montajı">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="serviceIcon">İkon (Font Awesome)</label>
+                                        <input type="text" id="serviceIcon" placeholder="fas fa-tools">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="serviceDescription">Açıklama</label>
+                                    <textarea id="serviceDescription" rows="2" placeholder="Hizmet açıklaması..."></textarea>
+                                </div>
+                                <button id="addService" class="btn btn-success">
+                                    <i class="fas fa-plus"></i>
+                                    Hizmet Ekle
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="services-list">
+                            <h3>Mevcut Hizmetler</h3>
+                            <div id="servicesList" class="services-grid"></div>
+                        </div>
+                    </div>
+
+                    <div class="action-buttons">
+                        <button id="saveServices" class="btn btn-primary">
+                            <i class="fas fa-save"></i>
+                            Hizmetleri Kaydet
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Brands Tab -->
+                <div id="brandsTab" class="tab-content">
+                    <div class="section-header">
+                        <h2><i class="fas fa-star"></i> Marka Yönetimi</h2>
+                        <p>Çalıştığınız lastik markalarını yönetin</p>
+                    </div>
+
+                    <div class="brands-manager">
+                        <div class="add-brand-section">
+                            <h3>Yeni Marka Ekle</h3>
+                            <div class="brand-form">
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="brandName">Marka Adı</label>
+                                        <input type="text" id="brandName" placeholder="Bridgestone">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="brandDescription">Açıklama</label>
+                                    <textarea id="brandDescription" rows="2" placeholder="Marka açıklaması..."></textarea>
+                                </div>
+                                <button id="addBrand" class="btn btn-success">
+                                    <i class="fas fa-plus"></i>
+                                    Marka Ekle
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="brands-list">
+                            <h3>Mevcut Markalar</h3>
+                            <div id="brandsList" class="brands-grid"></div>
+                        </div>
+                    </div>
+
+                    <div class="action-buttons">
+                        <button id="saveBrands" class="btn btn-primary">
+                            <i class="fas fa-save"></i>
+                            Markaları Kaydet
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Contact Tab -->
+                <div id="contactTab" class="tab-content">
+                    <div class="section-header">
+                        <h2><i class="fas fa-phone"></i> İletişim Bilgileri</h2>
+                        <p>Telefon, adres ve sosyal medya bilgilerini düzenle</p>
+                    </div>
+
+                    <div class="form-grid">
+                        <div class="form-section">
+                            <h3>İletişim Bilgileri</h3>
+                            <div class="form-group">
+                                <label for="contactPhone">Telefon</label>
+                                <input type="tel" id="contactPhone" placeholder="0552 850 86 06">
+                            </div>
+                            <div class="form-group">
+                                <label for="contactEmail">Email</label>
+                                <input type="email" id="contactEmail" placeholder="info@otolastikpro.com">
+                            </div>
+                            <div class="form-group">
+                                <label for="contactAddress">Adres</label>
+                                <textarea id="contactAddress" rows="2" placeholder="Esenyurt / İstanbul"></textarea>
+                            </div>
+                        </div>
+
+                        <div class="form-section">
+                            <h3>Çalışma Saatleri</h3>
+                            <div class="form-group">
+                                <label for="workingWeekdays">Hafta İçi</label>
+                                <input type="text" id="workingWeekdays" placeholder="Pazartesi - Cumartesi: 08:00 - 19:00">
+                            </div>
+                            <div class="form-group">
+                                <label for="workingWeekend">Hafta Sonu</label>
+                                <input type="text" id="workingWeekend" placeholder="Pazar: 09:00 - 17:00">
+                            </div>
+                        </div>
+
+                        <div class="form-section">
+                            <h3>Sosyal Medya</h3>
+                            <div class="form-group">
+                                <label for="facebookLink">Facebook</label>
+                                <input type="url" id="facebookLink" placeholder="https://facebook.com/otolastikpro">
+                            </div>
+                            <div class="form-group">
+                                <label for="instagramLink">Instagram</label>
+                                <input type="url" id="instagramLink" placeholder="https://instagram.com/otolastikpro">
+                            </div>
+                            <div class="form-group">
+                                <label for="twitterLink">Twitter</label>
+                                <input type="url" id="twitterLink" placeholder="https://twitter.com/otolastikpro">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="action-buttons">
+                        <button id="saveContact" class="btn btn-primary">
+                            <i class="fas fa-save"></i>
+                            İletişimi Kaydet
+                        </button>
+                    </div>
+                </div>
+
+                <!-- About Tab -->
+                <div id="aboutTab" class="tab-content">
+                    <div class="section-header">
+                        <h2><i class="fas fa-info-circle"></i> Hakkımızda</h2>
+                        <p>Şirket bilgileri ve istatistikleri</p>
+                    </div>
+
+                    <div class="form-section">
+                        <h3>Hakkımızda Metni</h3>
+                        <div class="form-group">
+                            <label for="aboutText">Şirket Açıklaması</label>
+                            <div id="aboutTextEditor" style="height: 200px;"></div>
+                        </div>
+                    </div>
+
+                    <div class="form-section">
+                        <h3>İstatistikler</h3>
+                        <div class="stats-grid">
+                            <div class="stat-item">
+                                <label for="happyCustomers">Mutlu Müşteri Sayısı</label>
+                                <input type="text" id="happyCustomers" placeholder="5000+">
+                            </div>
+                            <div class="stat-item">
+                                <label for="experienceYears">Tecrübe Yılı</label>
+                                <input type="text" id="experienceYears" placeholder="20+">
+                            </div>
+                            <div class="stat-item">
+                                <label for="brandCount">Marka Seçeneği</label>
+                                <input type="text" id="brandCount" placeholder="15+">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="action-buttons">
+                        <button id="saveAbout" class="btn btn-primary">
+                            <i class="fas fa-save"></i>
+                            Hakkımızda Kaydet
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/quill@2.0.0/dist/quill.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
