@@ -55,12 +55,10 @@ otolastik/
 ## 🎯 Hedef Kitle
 - Araç sahipleri
 - Lastik arayan müşteriler
-
-
-## Canlı Görünümü
-- https://otolastik.netlify.app/
 - Oto servis arayanlar
 - Mobil kullanıcılar öncelikli
 
 ---
-**Not**: Bu site template olarak hazırlanmıştır. Gerçek kullanım için yukarıda belirtilen güncellemeleri yapmayı unutmayın!
+
+## Canlı Görünümü
+- https://otolastik.netlify.app/
