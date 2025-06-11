@@ -33,25 +33,6 @@ otolastik/
 2. index.html dosyasını bir web tarayıcısında açın
 3. Site tamamen çalışır durumda!
 
-## 📝 Güncelleme Gereken Bilgiler
-Site geçici bilgilerle doldurulmuştur. Aşağıdakileri güncellemeyi unutmayın:
-
-### İletişim Bilgileri (index.html içinde):
-- **Adres**: Atatürk Mah. Cumhuriyet Cad. No:123, Kadıköy / İstanbul
-- **Telefon**: 0216 555 12 34 / 0532 123 45 67
-- **E-posta**: info@otolastikpro.com / destek@otolastikpro.com
-- **Çalışma Saatleri**: Pazartesi-Cumartesi: 08:00-19:00, Pazar: 09:00-17:00
-
-### Şirket Bilgileri:
-- **Şirket Adı**: OtoLastik Pro
-- **Deneyim**: 20 yıl
-- **Müşteri Sayısı**: 5000+
-
-## 🖼️ Görsel Güncelleme
-- Şu anda Font Awesome ikonları kullanılıyor
-- Gerçek fotoğraflar eklemek için:
-  - Görselleri `images/` klasörü oluşturup içine koyun
-  - HTML'de ilgili yerlerdeki `<i>` taglerini `<img>` tagleri ile değiştirin
 
 ## 🚀 Geliştirme Önerileri
 - Google Maps entegrasyonu
@@ -74,6 +55,10 @@ Site geçici bilgilerle doldurulmuştur. Aşağıdakileri güncellemeyi unutmay�
 ## 🎯 Hedef Kitle
 - Araç sahipleri
 - Lastik arayan müşteriler
+
+
+## Canlı Görünümü
+- https://otolastik.netlify.app/
 - Oto servis arayanlar
 - Mobil kullanıcılar öncelikli
 
